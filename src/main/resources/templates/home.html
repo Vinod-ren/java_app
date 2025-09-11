@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title>Ibiza Team</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link href="../../open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" th:href="@{/open-iconic/font/css/open-iconic-bootstrap.css}" />
+    <link href="../../css/style.css" rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+ </head>
+<body>
+<div class="container">
+   <div class="row">
+       <div class="col-sm mt-5">
+           <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+		       <ul class="navbar-nav" th:each="menu, iter : ${menus}">
+				  <li class="nav-item active" th:if="${iter.count == 1}">
+				    <a class="nav-link active" th:href="@{/}" th:text="${menu }"></a>
+				  </li>
+				  <li class="nav-item" th:if="${iter.count == 2}">
+				    <a class="nav-link" th:href="@{/restinfo}" th:text="${menu }"></a>
+				  </li>
+				  <li class="nav-item" th:if="${iter.count == 3}">
+				    <a class="nav-link" th:href="@{/documentation}" th:text="${menu }"></a>
+				  </li>
+				  <li class="nav-item" th:if="${iter.count == 4}">
+				    <a class="nav-link" th:href="@{/about}" th:text="${menu }"></a>
+				  </li>
+				</ul>
+			</nav>
+       </div>
+   </div>
+   <div class="row">
+       <div class="col-sm mt-5 text-center">
+           <h1>Welcome to <span class="badge badge-secondary">Ibiza Team's homepage</span></h1>
+           Today is <label th:text="${#dates.format(standardDate, 'dd-MM-yyyy HH:mm')}"></label>
+       </div>
+   </div>
+   <form>
+	  <div class="form-row">
+	    <div class="col">
+	      <div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">Kyselyn nimi</span>
+			  </div>
+			  <input type="text" id="questionaryName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+	    </div>
+	  </div>
+	  <!-- Show added questions -->
+	  <div class="form-row">
+	    <div class="col">
+	    <table class="table table-bordered">
+		  <thead>
+		    <tr>
+		      <th scope="col" class="text-center">#</th>
+		      <th colspan="3" class="text-center">Question</th>
+		      <th scope="col" class="text-center">Type</th>
+		      <th scope="col" class="text-center">Action</th>
+		    </tr>
+		  </thead>
+		  <tbody id="questionListTbody">
+		  </tbody>
+		</table>
+	    </div>
+	  </div>  
+	  <div class="form-row">
+	    <div class="col">
+	      <div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">Kysymys</span>
+			  </div>
+			  <input type="text" id="questionInput" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+	    </div>
+	    <div class="col">
+	      <div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <label class="input-group-text" for="questionTypeSelect">Kysymystyyppi</label>
+			  </div>
+			  <select class="custom-select" id="questionTypeSelect">
+			       <option th:each="questionType, index : ${questionTypes}" th:value="${questionType.questionTypeId}" th:text="${questionType.type}"></option>
+			  </select>
+	      </div>
+	    </div> 
+	  </div>
+	  <!-- Add more question -->
+	  <div class="form-row">
+	     <div class="col">
+	         <button type="button" class="btn btn-outline-secondary" id="addBtn">Lisää kysymys</button>
+	     </div>
+	  </div>
+	  <!-- Create survey button -->
+	  <div class="form-row text-center">
+	     <div class="col">
+	         <button type="button" class="btn btn-outline-primary" id="createBtn">Luo kysely</button>
+	     </div>
+	  </div>
+</form>
+</div>
+<div class="modal fade" id="thankModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Kiitos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" th:text="${success }"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="${close }"></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../../jquery/jquery-3.3.1.min.js" th:src="@{/jquery/jquery-3.3.1.min.js}"></script>
+<script src="../../poper/popper.min.js" th:src="@{/poper/popper.min.js}"></script>
+<script src="../../bootstrap/bootstrap.min.js" th:src="@{/bootstrap/bootstrap.min.js}"></script>
+<script src="../../js/home.js" th:src="@{/js/home.js}"></script>
+</body>
+</html>

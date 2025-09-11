@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link href="../../open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" th:href="@{/open-iconic/font/css/open-iconic-bootstrap.css}" />
+    <link href="../../css/style.css" rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+<title>Rest APIs</title>
+</head>
+<body>
+<div class="container">
+   <div class="row">
+       <div class="col-sm mt-5">
+           <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+		       <ul class="navbar-nav" th:each="menu, iter : ${menus}">
+				  <li class="nav-item" th:if="${iter.count == 1}">
+				    <a class="nav-link" th:href="@{/}" th:text="${menu }"></a>
+				  </li>
+				  <li class="nav-item active" th:if="${iter.count == 2}">
+				    <a class="nav-link" th:href="@{/restinfo}" th:text="${menu }"></a>
+				  </li>
+				  <li class="nav-item" th:if="${iter.count == 3}">
+				    <a class="nav-link" th:href="@{/documentation}" th:text="${menu }"></a>
+				  </li>
+				  <li class="nav-item" th:if="${iter.count == 4}">
+				    <a class="nav-link" th:href="@{/about}" th:text="${menu }"></a>
+				  </li>
+				</ul>
+			</nav>
+       </div>
+   </div>
+	   <h1 style = "text-align: center">REST-ohje digitiimille</h1>
+	   <h4 style = "padding-top: 20px">Huom! Kaikki endpointit käyttävät seuraavaa url osoitetta: <span class="badge badge-secondary">https://survey-app-ibiza.herokuapp.com/api/v2</span></h4>
+	<div id = "allQuestionaries" class = "col-sm mt-10">
+	   <h2 style = "padding-top: 20px">All Questionaries:</h2>
+	   <h5 style = "padding-top: 20px">Method:  <span style = "font-size: 15px">GET</span></h5>
+	   <h5 style = "padding-top: 20px">Endpoint: <a th:href="@{/api/v2/questionaries}">/questionaries</a></h5>
+	   <h5 style = "padding-top: 20px">JSON Example:</h5>
+	   <img th:src = "@{/image/JSON_All_Questionarys.jpeg}"/>
+	</div>
+	
+	<div id = "QuestionariesById">
+	   <h2 style = "padding-top: 20px">Questionaries By Id:</h2>
+	   <h5 style = "padding-top: 20px">Method:  <span style = "font-size: 15px">GET</span></h5>
+	   <h5 style = "padding-top: 20px">Endpoint: <a th:href="@{/api/v2/questionaries/questionary/4}">/questionaries/questionary/{id}</a></h5>
+	   <h5 style = "padding-top: 20px">JSON Example:</h5>
+	   <img th:src = "@{/image/JSON_QuestionarysById.jpeg}"/>
+	</div>
+	
+	<div id = "PostAnswers">
+	   <h2 style = "padding-top: 20px">Post Answers:</h2>
+	   <h5 style = "padding-top: 20px">Method:  <span style = "font-size: 15px">POST (Test with PostMan/etc.)</span></h5>
+	   <h5 style = "padding-top: 20px">Endpoint: <a th:href="@{/api/v2/answers}">/answers</a></h5>
+	   <h5 style = "padding-top: 20px">JSON Example:</h5>
+	   <img th:src = "@{/image/JSON_Post_Answers.jpeg}"/>
+	</div>
+</div>   
+<script src="../../jquery/jquery-3.3.1.min.js" th:src="@{/jquery/jquery-3.3.1.min.js}"></script>
+<script src="../../poper/popper.min.js" th:src="@{/poper/popper.min.js}"></script>
+<script src="../../bootstrap/bootstrap.min.js" th:src="@{/bootstrap/bootstrap.min.js}"></script>
+<script src="../../js/home.js" th:src="@{/js/home.js}"></script>
+</body>
+</html>
